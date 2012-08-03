@@ -620,31 +620,12 @@ var filepicker = (function(){
                 data = toQueryString(options.data);
             }
 
-            if (window.XDomainRequest) {
-                return XDomainAjax(options);
-            }
-
             //creating the request
             var xhr;
             if (options.xhr) {
                 xhr = options.xhr;
             } else {
-                try{
-                    // Modern browsers
-                    xhr = new XMLHttpRequest();
-                } catch (e){
-                    // IE
-                    try{
-                        xhr = new ActiveXObject("Msxml2.XMLHTTP");
-                    } catch (e) {
-                        try{
-                            xhr = new ActiveXObject("Microsoft.XMLHTTP");
-                        } catch (e){
-                            // Something went wrong
-                            throw "Your browser does not support AJAX and so cannot excecute this method";
-                        }
-                    }
-                }
+                xhr = new XMLHttpRequest();
             }
 
             //Handlers
@@ -684,59 +665,6 @@ var filepicker = (function(){
             xhr.send(data); 
 
             return xhr;
-        };
-
-        //Ajax using XDomainRequest - different enough from normal xhr that we do it separately
-        var XDomainAjax = function(options) {
-            if (!window.XDomainRequest) {return null;}
-
-            var url = options.url || null;
-            var method = options.method ? options.method.toUpperCase() : "POST";
-            var success = options.success || function(){};
-            var error = options.error || function(){};
-            var data = options.data || {};
-
-            //protocol of the url must match our protocol
-            if (window.location.protocol == "http:") {
-                url = url.replace("https:","http:");
-            } else if (window.location.protocol == "https:") {
-                url = url.replace("http:","https:");
-            }
-
-            if (options.async) {
-                throw "Asyncronous Cross-domain requests are not supported";
-            }
-
-            //Only supports get and post
-            if (method != "GET" && method != "POST") {
-                data["_method"] = method;
-                method = "POST";
-            }
-
-            data = data ? toQueryString(data) : null;
-
-            //Executing the request
-            if (data && method == 'GET') {
-                url += (url.contains('?') ? '&' : '?') + data;
-                data = null;
-            }
-
-            var xdr = new window.XDomainRequest();
-            xdr.onload = function() {
-                var resp = xdr.responseText;
-                if (options.json) {
-                    resp = utilities.JSON.decode(resp);
-                }
-                success(resp, xdr);
-            };
-            xdr.onerror = function() {
-                var resp = xdr.responseText || 'error';
-                error(resp, xdr);
-            };
-            //we can't set any headers
-            xdr.open(method, url, true);
-            xdr.send(data);
-            return xdr;
         };
 
         return ajax;
