@@ -1,0 +1,23 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>Cordova</title>
+<script type="text/javascript" charset="utf-8" src="cordova-1.9.0.js"></script>
+</head>
+<body>
+<h1>Hello World</h1>
+<input type="filepicker" name="test"/>
+<a id="cool">Test</a>
+<script src="http://api.downlow.herokuapp.com/v0/filepicker.js" charset="utf-8"></script>
+<script type="text/javascript">
+console.log("HERE");
+filepicker.setKey("A9o1vYeamQTyUC8Eb1Z8pz");
+console.log(window.opener);
+document.getElementById("cool").onclick = function() {
+	console.log("Huzzay");
+	//window.location.href = 'https://www.filepicker.io/dialog/open/?m=image/jpeg&key=l5uQ3k7FQ5GoYCHyTdZV&id=1343951054904&modal=false&multi=true';
+	window.location.href = 'http://www.downlow.herokuapp.com/debug/phonegap/'
+};
+</script>
+</body>
+</html>
