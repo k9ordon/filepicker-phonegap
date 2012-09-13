@@ -1,8 +1,4 @@
 ## Filepicker.io Phonegap samples and library
-
-#### Filepicker.io now supports phonegap!
-Filepicker.io also supports [Javascript](https://developers.filepicker.io/docs/web/), [iOS](https://developers.filepicker.io/docs/ios/), and [Android](https://developers.filepicker.io/docs/android/)
-
 ####Setting up your project
 Along with the standard Cordova 2.0 base platform, Filepicker.io also requires the ChildBrowser plugin:
 
@@ -36,4 +32,6 @@ There's so much more, including [saving files](https://developers.filepicker.io/
 If you have any questions, don't hesitate to reach out to [support@filepicker.io](mailto:support@filepicker.io)
 
 Note that drag-drop functionality is not supported in PhoneGap as mobile phones don't have the required functionality.
+
+Filepicker.io also supports [Javascript](https://developers.filepicker.io/docs/web/), [iOS](https://developers.filepicker.io/docs/ios/), and [Android](https://developers.filepicker.io/docs/android/), and more libraries are being added every week!
 *****
