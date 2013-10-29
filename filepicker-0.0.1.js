@@ -201,12 +201,14 @@ var filepicker = (function(){
 
         var id = getID();
         var url;
-        
+
         if (dialogType == DIALOG_TYPES.OPEN){
             url = constructOpenURL(mimetype, id, options);
         } else if (dialogType == DIALOG_TYPES.SAVEAS){
             url = constructSaveAsURL(file_url, mimetype, id, options);
         }
+
+        console.log('yo', url, id);
 
         var pg_callback = function(argsParsed){
             var fpurl = argsParsed['fpurl'];
@@ -215,14 +217,21 @@ var filepicker = (function(){
 
         picker = createPhoneGapPane(url, pg_callback);
 
+        console.log(url, pg_callback);
+
 		return picker;
     };
 
     var createPhoneGapPane = function(url, callback) {
+        console.log(url);
+
+        document.body.innerHTML += '<iframe src="' + url + '" height="600px" width="800px">';
+
+        return;
         if (window.plugins === undefined || window.plugins.childBrowser === undefined) {
             throw FilepickerException("Could not find ChildBrowser plugin. Be sure you have it installed. See https://github.com/purplecabbage/phonegap-plugins for more details");
         }
-
+        /*
         window.plugins.childBrowser.showWebPage(url);
         window.plugins.childBrowser.onLocationChange = function(loc){
             //Really cool hack
@@ -250,6 +259,7 @@ var filepicker = (function(){
                 callback(argsParsed);
             }
         };
+        */
     };
 
     /********************UTILITIES***********************/
